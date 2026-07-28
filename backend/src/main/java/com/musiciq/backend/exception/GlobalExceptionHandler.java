@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import com.musiciq.backend.exception.DuplicateAlbumException;
+import com.musiciq.backend.exception.ResourceNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +48,16 @@ public class GlobalExceptionHandler {
             errors.put(field, violation.getMessage());
         });
         return new ResponseEntity<>(ApiResponse.error("Validation failed", errors), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ApiResponse.error(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicateAlbumException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDuplicateAlbumException(DuplicateAlbumException ex) {
+        return new ResponseEntity<>(ApiResponse.error(ex.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ExternalServiceException.class)

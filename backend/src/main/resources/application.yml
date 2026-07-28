@@ -23,4 +23,7 @@ itunes:
   base-url: https://itunes.apple.com
   search-endpoint: /search
   default-limit: 50
+  timeout:
+    connect: 5000
+    read: 10000
 

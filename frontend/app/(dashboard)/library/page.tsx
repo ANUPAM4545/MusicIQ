@@ -77,7 +77,7 @@ export default function LibraryPage() {
         {isError && (
           <ErrorState 
             title="Failed to Load Library" 
-            message={(error as any)?.response?.data?.message || "An error occurred while loading your library."}
+            message={(error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An error occurred while loading your library."}
             onRetry={() => refetch()}
           />
         )}
@@ -100,7 +100,7 @@ export default function LibraryPage() {
           </div>
         )}
 
-        {!isLoading && !isError && !isEmpty && (
+        {library && !isLoading && !isError && !isEmpty && (
           <>
             <LibraryToolbar 
               searchTerm={searchTerm}

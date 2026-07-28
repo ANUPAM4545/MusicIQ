@@ -37,8 +37,9 @@ export default function LoginPage() {
     onSuccess: () => {
       router.push("/dashboard");
     },
-    onError: (error: any) => {
-      setErrorMsg(error.response?.data?.message || "Failed to login. Please check your credentials.");
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { message?: string } } };
+      setErrorMsg(err.response?.data?.message || "Failed to login. Please check your credentials.");
     },
   });
 
@@ -79,7 +80,7 @@ export default function LoginPage() {
             {loginMutation.isPending ? "Logging in..." : "Login"}
           </Button>
           <p className="text-sm text-center text-gray-500">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/register" className="text-primary hover:underline">
               Register here
             </Link>

@@ -34,8 +34,9 @@ export function AlbumCard({ album }: AlbumCardProps) {
           setIsSaved(true);
           toast.success(`${album.title} added to library!`);
         },
-        onError: (error: any) => {
-          const message = error.response?.data?.message || "Failed to save album";
+        onError: (error: unknown) => {
+          const err = error as { response?: { data?: { message?: string } } };
+          const message = err.response?.data?.message || "Failed to save album";
           if (message.toLowerCase().includes("conflict") || message.toLowerCase().includes("already exists")) {
              toast.error(`${album.title} is already in your library.`);
              setIsSaved(true);

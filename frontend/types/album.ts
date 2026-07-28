@@ -37,6 +37,6 @@ export interface SavedAlbumResponse {
   genre?: string;
   trackCount?: number;
   personalRating?: number;
-  notes?: string;
+  personalNotes?: string;
   createdAt: string;
 }

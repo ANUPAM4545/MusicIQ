@@ -39,8 +39,9 @@ export default function RegisterPage() {
     onSuccess: () => {
       router.push("/dashboard");
     },
-    onError: (error: any) => {
-      setErrorMsg(error.response?.data?.message || "Failed to register. Please try again.");
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { message?: string } } };
+      setErrorMsg(err.response?.data?.message || "Failed to register. Please try again.");
     },
   });
 

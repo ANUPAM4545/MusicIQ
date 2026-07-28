@@ -54,7 +54,7 @@ export default function SearchPage() {
         {hasSearched && isError && (
           <ErrorState 
             title="Search Failed" 
-            message={(error as any)?.response?.data?.message || "An error occurred while searching for albums. Please try again later."}
+            message={(error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An error occurred while searching for albums. Please try again later."}
             onRetry={() => refetch()}
           />
         )}

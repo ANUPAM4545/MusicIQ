@@ -3,4 +3,5 @@ export const queryKeys = {
   library: ['library'] as const,
   album: (id: string) => ['album', id] as const,
   analytics: ['analytics'] as const,
+  insights: ['insights'] as const,
 };

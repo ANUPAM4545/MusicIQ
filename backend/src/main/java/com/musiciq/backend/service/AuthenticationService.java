@@ -28,14 +28,15 @@ public class AuthenticationService {
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
+        String email = request.getEmail().toLowerCase();
+        if (userRepository.existsByEmail(email)) {
             throw new ResourceConflictException("Email already in use");
         }
 
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .email(request.getEmail())
+                .email(email)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
@@ -50,15 +51,18 @@ public class AuthenticationService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public AuthResponse login(LoginRequest request) {
+        String email = request.getEmail().toLowerCase();
+        
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        email,
                         request.getPassword()
                 )
         );
 
-        User user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(); // Authentication would have failed if not found
 
         String jwtToken = jwtService.generateToken(user);

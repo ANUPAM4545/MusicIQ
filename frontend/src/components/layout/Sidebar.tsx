@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Search, Library, BarChart2, BrainCircuit } from "lucide-react";
+import { LayoutDashboard, Search, Library, BarChart2, BrainCircuit, User } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -11,6 +11,7 @@ const navigation = [
   { name: "Library", href: "/library", icon: Library },
   { name: "Analytics", href: "/analytics", icon: BarChart2 },
   { name: "AI Insights", href: "/ai-insights", icon: BrainCircuit },
+  { name: "Profile", href: "/profile", icon: User },
 ];
 
 export function Sidebar() {

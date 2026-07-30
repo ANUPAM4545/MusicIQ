@@ -9,8 +9,13 @@ export function useSaveAlbum() {
   return useMutation({
     mutationFn: (data: AlbumCreateRequest) => albumService.saveAlbum(data),
     onSuccess: () => {
-      // Invalidate the library query so it fetches fresh data when navigated to
       queryClient.invalidateQueries({ queryKey: queryKeys.library });
+      queryClient.invalidateQueries({ queryKey: queryKeys.analytics });
+      queryClient.invalidateQueries({ queryKey: queryKeys.insights });
+      queryClient.invalidateQueries({ queryKey: ['profile-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['profile-activity'] });
+      queryClient.invalidateQueries({ queryKey: ['profile-achievements'] });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
   });
 }

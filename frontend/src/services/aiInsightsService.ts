@@ -4,7 +4,7 @@ import { ApiResponse } from '@/types/api';
 
 export const aiInsightsService = {
   getInsights: async (): Promise<AiInsightsResponse> => {
-    const response = await api.get<ApiResponse<AiInsightsResponse>>('/insights');
+    const response = await api.get<ApiResponse<AiInsightsResponse>>('/ai/insights');
     return response.data.data;
   },
 };

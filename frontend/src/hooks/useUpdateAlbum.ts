@@ -53,6 +53,12 @@ export function useUpdateAlbum() {
     onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.library });
       queryClient.invalidateQueries({ queryKey: queryKeys.album(variables.id) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.analytics });
+      queryClient.invalidateQueries({ queryKey: queryKeys.insights });
+      queryClient.invalidateQueries({ queryKey: ['profile-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['profile-activity'] });
+      queryClient.invalidateQueries({ queryKey: ['profile-achievements'] });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onSuccess: () => {
       toast.success('Album updated successfully');

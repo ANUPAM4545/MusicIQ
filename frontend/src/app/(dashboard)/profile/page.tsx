@@ -55,31 +55,37 @@ export default function ProfilePage() {
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="edit">Edit Profile</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="activity">Activity</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="overview" className="space-y-6 outline-none">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 space-y-6">
-              {achievements && <AchievementsGrid achievements={achievements} />}
-            </div>
+        <TabsContent value="overview" className="space-y-6 outline-none mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="space-y-6">
               {personality && <ListeningPersonality personality={personality} />}
-              {activities && <ActivityTimeline activities={activities} />}
+            </div>
+            <div className="space-y-6">
+              {achievements && <AchievementsGrid achievements={achievements} />}
             </div>
           </div>
         </TabsContent>
-        
-        <TabsContent value="edit" className="outline-none">
-          <div className="max-w-3xl">
-            <ProfileForm profile={profile} />
+
+        <TabsContent value="activity" className="outline-none mt-6">
+          <div className="max-w-4xl">
+            {activities && <ActivityTimeline activities={activities} />}
           </div>
         </TabsContent>
         
-        <TabsContent value="security" className="outline-none">
-          <div className="max-w-3xl">
-            <SecuritySection profile={profile} />
+        <TabsContent value="settings" className="outline-none mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h3>
+              <ProfileForm profile={profile} />
+            </div>
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Security & Appearance</h3>
+              <SecuritySection profile={profile} />
+            </div>
           </div>
         </TabsContent>
       </Tabs>

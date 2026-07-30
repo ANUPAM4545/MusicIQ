@@ -20,7 +20,9 @@ export function Sidebar() {
   return (
     <div className="flex h-full w-64 flex-col border-r bg-white">
       <div className="flex h-16 shrink-0 items-center px-6 border-b">
-        <h1 className="text-xl font-bold tracking-tight text-primary">MusicIQ</h1>
+        <Link href="/" className="flex items-center gap-2">
+          <h1 className="text-xl font-bold tracking-tight text-primary hover:text-blue-700 transition-colors">MusicIQ</h1>
+        </Link>
       </div>
       <div className="flex flex-1 flex-col overflow-y-auto px-4 py-4">
         <nav className="flex-1 space-y-1">

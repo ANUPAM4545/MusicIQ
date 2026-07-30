@@ -18,17 +18,26 @@ export interface UserProfile {
 }
 
 export interface ProfileUpdateRequest {
-  firstName: string;
-  lastName: string;
-  username: string;
-  bio: string;
-  country: string;
-  timezone: string;
-  language: string;
-  favoriteGenre: string;
-  favoriteArtist: string;
-  theme: string;
-  phoneNumber: string;
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+  bio?: string;
+  country?: string;
+  timezone?: string;
+  language?: string;
+  favoriteGenre?: string;
+  favoriteArtist?: string;
+  theme?: string;
+  phoneNumber?: string;
+}
+
+export interface CollectionHealth {
+  score: number;
+  ratedAlbumsScore: number;
+  metadataCompletenessScore: number;
+  genreDiversityScore: number;
+  artistDiversityScore: number;
+  collectionActivityScore: number;
 }
 
 export interface ProfileStats {
@@ -36,7 +45,7 @@ export interface ProfileStats {
   artistsCount: number;
   genresCount: number;
   averageRating: number;
-  collectionHealth: number;
+  collectionHealth: CollectionHealth;
   diversityScore: number;
   aiInsightCount: number;
 }

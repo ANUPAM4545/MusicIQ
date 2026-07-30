@@ -13,4 +13,11 @@ public class CollectionHealthDto {
     private Integer score;
     private String title;
     private String description;
+    
+    // Breakdown metrics
+    private Integer ratedAlbumsScore;
+    private Integer metadataCompletenessScore;
+    private Integer genreDiversityScore;
+    private Integer artistDiversityScore;
+    private Integer collectionActivityScore;
 }

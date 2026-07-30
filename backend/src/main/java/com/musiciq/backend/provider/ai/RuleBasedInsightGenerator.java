@@ -293,36 +293,56 @@ public class RuleBasedInsightGenerator implements InsightGenerator {
     }
 
     private CollectionHealthDto generateCollectionHealth(AnalyticsOverviewResponse analytics, List<Album> allAlbums) {
-        int score = 50;
-        String title = "Average Health";
-        String description = "Your collection is growing steadily.";
-
-        double diversityRatio = (double) analytics.getTotalUniqueArtists() / Math.max(analytics.getTotalAlbums(), 1);
+        long albumsSaved = analytics.getTotalAlbums();
+        long genresCount = analytics.getTotalGenres();
+        long artistsCount = analytics.getTotalUniqueArtists();
+        
         long ratedCount = allAlbums.stream().filter(a -> a.getPersonalRating() != null).count();
-        double ratingRatio = (double) ratedCount / Math.max(analytics.getTotalAlbums(), 1);
+        long withNotesCount = allAlbums.stream().filter(a -> a.getNotes() != null && !a.getNotes().trim().isEmpty()).count();
+        
+        // Rated albums score (Max 20): proportional to % rated, but at least 10 albums expected
+        int ratedScore = albumsSaved == 0 ? 0 : Math.min(20, (int) Math.round(((double) ratedCount / Math.max(10, albumsSaved)) * 20));
+        
+        // Metadata completeness (Max 20): % of albums with notes
+        int metadataScore = albumsSaved == 0 ? 0 : Math.min(20, (int) Math.round(((double) withNotesCount / Math.max(5, albumsSaved)) * 20));
+        
+        // Genre diversity (Max 20): 2 points per genre up to 10
+        int genreScore = Math.min(20, (int) (genresCount * 2));
+        
+        // Artist diversity (Max 20): 1 point per artist up to 20
+        int artistScore = Math.min(20, (int) artistsCount);
+        
+        // Collection activity (Max 20): 1 point per album up to 20
+        int activityScore = Math.min(20, (int) albumsSaved);
+        
+        int totalHealthScore = ratedScore + metadataScore + genreScore + artistScore + activityScore;
+        
+        String title;
+        String description;
 
-        if (analytics.getTotalAlbums() < 5) {
-            score = 30;
+        if (albumsSaved < 5) {
             title = "Just Starting";
             description = "Start saving more albums to improve your collection health.";
-        } else if (diversityRatio > 0.6 && ratingRatio > 0.5) {
-            score = 90;
-            title = "Excellent Diversity";
-            description = "Your collection spans many artists and genres, and you rate them frequently.";
-        } else if (diversityRatio < 0.3) {
-            score = 60;
-            title = "Artist Heavy";
-            description = "You may want to explore more artists to diversify your collection.";
-        } else if (ratingRatio < 0.2) {
-            score = 70;
-            title = "Needs Ratings";
-            description = "Your collection has good diversity, but rating your albums will improve AI insights.";
+        } else if (totalHealthScore >= 80) {
+            title = "Excellent Health";
+            description = "Your collection spans many artists and genres, and you actively rate them.";
+        } else if (totalHealthScore >= 50) {
+            title = "Average Health";
+            description = "Your collection is growing steadily. Try rating more albums and adding notes.";
+        } else {
+            title = "Needs Improvement";
+            description = "You may want to explore more artists and rate your saved albums to diversify your collection.";
         }
 
         return CollectionHealthDto.builder()
-                .score(score)
+                .score(totalHealthScore)
                 .title(title)
                 .description(description)
+                .ratedAlbumsScore(ratedScore)
+                .metadataCompletenessScore(metadataScore)
+                .genreDiversityScore(genreScore)
+                .artistDiversityScore(artistScore)
+                .collectionActivityScore(activityScore)
                 .build();
     }
 }

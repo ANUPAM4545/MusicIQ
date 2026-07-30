@@ -32,11 +32,11 @@ export function AlbumDetailModal({ album, isOpen, onClose }: AlbumDetailModalPro
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-        <DialogContent className="max-w-3xl p-0 overflow-hidden bg-white sm:rounded-xl">
+        <DialogContent className="max-w-3xl p-0 overflow-hidden bg-white dark:bg-gray-900 dark:border-gray-800 sm:rounded-xl">
           <div className="flex flex-col md:flex-row h-full max-h-[85vh] overflow-y-auto md:overflow-hidden">
             {/* Left side - Artwork */}
-            <div className="w-full md:w-2/5 bg-gray-100 flex-shrink-0 flex items-center justify-center p-8 border-r">
-              <div className="w-full aspect-square relative shadow-lg rounded-md overflow-hidden bg-white">
+            <div className="w-full md:w-2/5 bg-gray-100 dark:bg-gray-800/50 flex-shrink-0 flex items-center justify-center p-8 border-r dark:border-gray-800">
+              <div className="w-full aspect-square relative shadow-lg rounded-md overflow-hidden bg-white dark:bg-gray-900">
                 {coverUrl ? (
                   <Image
                     src={coverUrl}
@@ -46,7 +46,7 @@ export function AlbumDetailModal({ album, isOpen, onClose }: AlbumDetailModalPro
                     sizes="(max-width: 768px) 100vw, 400px"
                   />
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-full text-gray-400">
+                  <div className="flex flex-col items-center justify-center h-full text-gray-400 dark:text-gray-500">
                     <Disc3 size={64} className="mb-2 opacity-20" />
                     <span className="text-sm font-medium">No Artwork</span>
                   </div>
@@ -59,15 +59,15 @@ export function AlbumDetailModal({ album, isOpen, onClose }: AlbumDetailModalPro
               <div className="flex justify-between items-start mb-1 pr-8">
                 <div>
                   <DialogHeader>
-                    <DialogTitle className="text-2xl md:text-3xl font-bold leading-tight text-gray-900 text-left">
+                    <DialogTitle className="text-2xl md:text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100 text-left">
                       {album.title}
                     </DialogTitle>
                   </DialogHeader>
-                  <p className="text-lg text-gray-600 font-medium mt-1">{album.artist}</p>
+                  <p className="text-lg text-gray-600 dark:text-gray-300 font-medium mt-1">{album.artist}</p>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-sm text-gray-500 pb-6 border-b">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-sm text-gray-500 dark:text-gray-400 pb-6 border-b dark:border-gray-800">
                 <span>{album.genre || "Unknown Genre"}</span>
                 <span>•</span>
                 <span>{releaseYear}</span>
@@ -81,15 +81,15 @@ export function AlbumDetailModal({ album, isOpen, onClose }: AlbumDetailModalPro
                 <span>Added {savedDate}</span>
               </div>
 
-              <div className="py-6 border-b">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+              <div className="py-6 border-b dark:border-gray-800">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 uppercase tracking-wider">
                   Your Rating
                 </h4>
                 <RatingSelector albumId={album.id} initialRating={album.personalRating} />
               </div>
 
               <div className="py-6 flex-1">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 uppercase tracking-wider">
                   Personal Notes
                 </h4>
                 <NotesEditor albumId={album.id} initialNotes={album.personalNotes} />
@@ -98,7 +98,7 @@ export function AlbumDetailModal({ album, isOpen, onClose }: AlbumDetailModalPro
               <div className="pt-6 mt-auto">
                 <Button 
                   variant="destructive" 
-                  className="w-full md:w-auto text-sm bg-red-50 hover:bg-red-100 hover:text-red-700 text-red-600 border border-red-200" 
+                  className="w-full md:w-auto text-sm bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-900/60 hover:text-red-700 dark:hover:text-red-300 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900" 
                   onClick={() => setIsDeleteDialogOpen(true)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />

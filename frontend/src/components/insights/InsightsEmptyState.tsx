@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export function InsightsEmptyState() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 w-full">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-12 w-full">
       <EmptyState 
         title="No Insights Available" 
         description="Build your music library to unlock personalized AI insights about your collection."

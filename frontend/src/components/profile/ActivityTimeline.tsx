@@ -29,16 +29,16 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
             No recent activity to show.
           </div>
         ) : (
-          <div className="relative border-l border-gray-200 ml-3 space-y-6">
+          <div className="relative border-l border-gray-200 dark:border-gray-800 ml-3 space-y-6">
             {activities.map((activity) => (
               <div key={activity.id} className="relative pl-6">
-                <span className="absolute -left-[9px] top-1 bg-white border border-gray-200 rounded-full p-1 shadow-sm">
+                <span className="absolute -left-[9px] top-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-full p-1 shadow-sm">
                   {getIcon(activity.actionType)}
                 </span>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-900">{activity.actionType}</h4>
-                    <p className="text-sm text-gray-600 mt-0.5">{activity.description}</p>
+                    <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100">{activity.actionType}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{activity.description}</p>
                   </div>
                   <time className="text-xs text-gray-400 shrink-0 mt-0.5">
                     {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}

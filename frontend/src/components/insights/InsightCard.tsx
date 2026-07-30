@@ -16,7 +16,7 @@ export function InsightCard({ title, description, iconName, badgeLabel, children
   const IconComponent = iconName ? (LucideIcons as unknown as Record<string, React.ElementType>)[iconName] : null;
 
   return (
-    <div className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col h-full ${className}`}>
+    <div className={`bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6 flex flex-col h-full ${className}`}>
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           {IconComponent && (
@@ -24,15 +24,15 @@ export function InsightCard({ title, description, iconName, badgeLabel, children
               <IconComponent size={20} />
             </div>
           )}
-          <h3 className="font-semibold text-gray-900">{title}</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
         </div>
         {badgeLabel && <InsightBadge label={badgeLabel} />}
       </div>
       
-      <p className="text-sm text-gray-600 mb-4 flex-grow">{description}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-grow">{description}</p>
       
       {children && (
-        <div className="mt-auto pt-4 border-t border-gray-50">
+        <div className="mt-auto pt-4 border-t border-gray-50 dark:border-gray-800">
           {children}
         </div>
       )}

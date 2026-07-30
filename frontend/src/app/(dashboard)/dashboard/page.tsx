@@ -31,7 +31,7 @@ export default function DashboardPage() {
     return (
       <div className="flex flex-col space-y-6">
         <WelcomeBanner />
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
           <EmptyState
             title="Start building your music library"
             description="Your dashboard will show analytics and AI insights once you add some albums to your collection."
@@ -53,7 +53,7 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       {analyticsError ? (
-        <div className="p-4 rounded-lg bg-red-50 text-red-600 flex items-center gap-2 border border-red-100">
+        <div className="p-4 rounded-lg bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center gap-2 border border-red-100 dark:border-red-900">
           <AlertCircle className="w-5 h-5" />
           <span>Failed to load analytics statistics.</span>
         </div>
@@ -98,7 +98,7 @@ export default function DashboardPage() {
         <div className="lg:col-span-2 flex flex-col space-y-6">
           {/* Latest AI Insight */}
           {insightsError ? (
-             <div className="p-4 rounded-lg bg-red-50 text-red-600 flex items-center gap-2 border border-red-100">
+             <div className="p-4 rounded-lg bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center gap-2 border border-red-100 dark:border-red-900">
                <AlertCircle className="w-5 h-5" />
                <span>Failed to load AI insights.</span>
              </div>

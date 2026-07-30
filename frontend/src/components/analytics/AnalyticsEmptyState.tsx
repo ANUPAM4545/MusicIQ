@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export function AnalyticsEmptyState() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 w-full">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-12 w-full">
       <EmptyState 
         title="No Analytics Available" 
         description="Add albums to your library to unlock analytics and generate insights about your music collection."

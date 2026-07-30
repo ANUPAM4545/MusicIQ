@@ -12,9 +12,9 @@ export function RevisitRecommendations({ albums }: RevisitRecommendationsProps) 
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 col-span-1 md:col-span-2 lg:col-span-full">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6 col-span-1 md:col-span-2 lg:col-span-full">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="font-semibold text-gray-900 text-lg">Recommended for Revisit</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg">Recommended for Revisit</h3>
         <InsightBadge label="Recommended" />
       </div>
       
@@ -24,7 +24,7 @@ export function RevisitRecommendations({ albums }: RevisitRecommendationsProps) 
           
           return (
             <div key={`${album.title}-${index}`} className="flex flex-col gap-3 group">
-              <div className="relative aspect-square w-full rounded-md bg-gray-100 overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
+              <div className="relative aspect-square w-full rounded-md bg-gray-100 dark:bg-gray-800 overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
                 {coverUrl ? (
                   <Image
                     src={coverUrl}
@@ -34,14 +34,14 @@ export function RevisitRecommendations({ albums }: RevisitRecommendationsProps) 
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gray-200" />
+                  <div className="w-full h-full bg-gray-200 dark:bg-gray-800" />
                 )}
               </div>
               <div className="flex flex-col min-w-0">
-                <h4 className="text-sm font-semibold text-gray-900 truncate" title={album.title}>
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate" title={album.title}>
                   {album.title}
                 </h4>
-                <p className="text-xs text-gray-500 truncate" title={album.artist}>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate" title={album.artist}>
                   {album.artist}
                 </p>
                 {album.reason && (

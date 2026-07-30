@@ -44,14 +44,14 @@ export function RecentAlbumsList({ albums }: RecentAlbumsListProps) {
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-semibold text-gray-900 truncate" title={album.title}>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate" title={album.title}>
                 {album.title}
               </h4>
-              <p className="text-xs text-gray-500 truncate" title={album.artist}>
+              <p className="text-xs text-gray-500 dark:text-gray-400 truncate" title={album.artist}>
                 {album.artist}
               </p>
             </div>
-            <div className="text-xs text-gray-400 whitespace-nowrap">
+            <div className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">
               {timeAgo}
             </div>
           </div>

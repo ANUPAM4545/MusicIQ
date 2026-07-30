@@ -83,7 +83,7 @@ export default function LibraryPage() {
         )}
 
         {!isLoading && !isError && isEmpty && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 mt-8">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-12 mt-8">
             <EmptyState 
               title="Your library is empty" 
               description="Start building your collection by searching for your favorite artists and albums."

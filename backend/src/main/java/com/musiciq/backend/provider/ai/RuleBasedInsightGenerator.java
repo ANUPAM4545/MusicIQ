@@ -17,7 +17,16 @@ public class RuleBasedInsightGenerator implements InsightGenerator {
     @Override
     public AiInsightsResponse generateInsights(AnalyticsOverviewResponse analytics, List<Album> allAlbums) {
         if (allAlbums.isEmpty()) {
-            return new AiInsightsResponse(List.of(), List.of(), new CollectionHealthDto(0, "Empty Library", "Start saving albums to generate insights."));
+            return new AiInsightsResponse(List.of(), List.of(), CollectionHealthDto.builder()
+                    .score(0)
+                    .title("Empty Library")
+                    .description("Start saving albums to generate insights.")
+                    .ratedAlbumsScore(0)
+                    .metadataCompletenessScore(0)
+                    .genreDiversityScore(0)
+                    .artistDiversityScore(0)
+                    .collectionActivityScore(0)
+                    .build());
         }
 
         List<InsightCardDto> insights = new ArrayList<>();
@@ -298,7 +307,7 @@ public class RuleBasedInsightGenerator implements InsightGenerator {
         long artistsCount = analytics.getTotalUniqueArtists();
         
         long ratedCount = allAlbums.stream().filter(a -> a.getPersonalRating() != null).count();
-        long withNotesCount = allAlbums.stream().filter(a -> a.getNotes() != null && !a.getNotes().trim().isEmpty()).count();
+        long withNotesCount = allAlbums.stream().filter(a -> a.getPersonalNotes() != null && !a.getPersonalNotes().trim().isEmpty()).count();
         
         // Rated albums score (Max 20): proportional to % rated, but at least 10 albums expected
         int ratedScore = albumsSaved == 0 ? 0 : Math.min(20, (int) Math.round(((double) ratedCount / Math.max(10, albumsSaved)) * 20));

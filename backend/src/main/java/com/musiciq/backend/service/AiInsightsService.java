@@ -41,7 +41,16 @@ public class AiInsightsService {
             return new AiInsightsResponse(
                     List.of(),
                     List.of(),
-                    new CollectionHealthDto(0, "Empty Library", "Start saving albums to generate insights.")
+                    CollectionHealthDto.builder()
+                            .score(0)
+                            .title("Empty Library")
+                            .description("Start saving albums to generate insights.")
+                            .ratedAlbumsScore(0)
+                            .metadataCompletenessScore(0)
+                            .genreDiversityScore(0)
+                            .artistDiversityScore(0)
+                            .collectionActivityScore(0)
+                            .build()
             );
         }
 

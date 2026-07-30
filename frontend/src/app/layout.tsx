@@ -14,18 +14,30 @@ export const metadata: Metadata = {
   description: "AI-Powered Music Library & Analytics Platform",
 };
 
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased bg-gray-50 text-gray-900 min-h-screen`}>
-        <QueryProvider>
-          {children}
-          <Toaster position="bottom-right" />
-        </QueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased bg-gray-50 text-gray-900 min-h-screen dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <QueryProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster position="bottom-right" />
+            </TooltipProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

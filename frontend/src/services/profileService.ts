@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '@/lib/api';
 import {
   UserProfile,
   ProfileUpdateRequest,
@@ -7,46 +7,36 @@ import {
   Achievement,
   ActivityLog,
 } from '@/types/profile';
-
-const API_URL = 'http://localhost:8080/api/profile';
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};
+import { ApiResponse } from '@/types/api';
 
 export const profileService = {
   getProfile: async (): Promise<UserProfile> => {
-    const response = await axios.get(API_URL, getAuthHeaders());
+    const response = await api.get<ApiResponse<UserProfile>>('/profile');
     return response.data.data;
   },
 
   updateProfile: async (request: ProfileUpdateRequest): Promise<UserProfile> => {
-    const response = await axios.patch(API_URL, request, getAuthHeaders());
+    const response = await api.patch<ApiResponse<UserProfile>>('/profile', request);
     return response.data.data;
   },
 
   getStats: async (): Promise<ProfileStats> => {
-    const response = await axios.get(`${API_URL}/stats`, getAuthHeaders());
+    const response = await api.get<ApiResponse<ProfileStats>>('/profile/stats');
     return response.data.data;
   },
 
   getPersonality: async (): Promise<Personality> => {
-    const response = await axios.get(`${API_URL}/personality`, getAuthHeaders());
+    const response = await api.get<ApiResponse<Personality>>('/profile/personality');
     return response.data.data;
   },
 
   getAchievements: async (): Promise<Achievement[]> => {
-    const response = await axios.get(`${API_URL}/achievements`, getAuthHeaders());
+    const response = await api.get<ApiResponse<Achievement[]>>('/profile/achievements');
     return response.data.data;
   },
 
   getActivityTimeline: async (): Promise<ActivityLog[]> => {
-    const response = await axios.get(`${API_URL}/activity`, getAuthHeaders());
+    const response = await api.get<ApiResponse<ActivityLog[]>>('/profile/activity');
     return response.data.data;
   },
 };

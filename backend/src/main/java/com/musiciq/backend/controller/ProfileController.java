@@ -33,7 +33,7 @@ public class ProfileController {
     }
 
     @Operation(summary = "Update current user's profile")
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<ApiResponse<UserProfileResponse>> updateProfile(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody ProfileUpdateRequest request) {

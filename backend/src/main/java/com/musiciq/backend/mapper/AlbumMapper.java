@@ -4,9 +4,11 @@ import com.musiciq.backend.dto.library.AlbumCreateRequest;
 import com.musiciq.backend.dto.library.AlbumUpdateRequest;
 import com.musiciq.backend.dto.library.SavedAlbumResponse;
 import com.musiciq.backend.entity.Album;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public interface AlbumMapper {
 
     List<SavedAlbumResponse> toSavedAlbumResponseList(List<Album> albums);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "itunesId", ignore = true)

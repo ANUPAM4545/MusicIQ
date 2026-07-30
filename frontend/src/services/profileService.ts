@@ -26,7 +26,7 @@ export const profileService = {
   },
 
   updateProfile: async (request: ProfileUpdateRequest): Promise<UserProfile> => {
-    const response = await axios.put(API_URL, request, getAuthHeaders());
+    const response = await axios.patch(API_URL, request, getAuthHeaders());
     return response.data.data;
   },
 

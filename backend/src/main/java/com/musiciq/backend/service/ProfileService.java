@@ -36,18 +36,17 @@ public class ProfileService {
     @Transactional
     public UserProfileResponse updateProfile(String email, ProfileUpdateRequest request) {
         User user = getUserByEmail(email);
-        
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setUsername(request.getUsername());
-        user.setBio(request.getBio());
-        user.setCountry(request.getCountry());
-        user.setTimezone(request.getTimezone());
-        user.setLanguage(request.getLanguage());
-        user.setFavoriteGenre(request.getFavoriteGenre());
-        user.setFavoriteArtist(request.getFavoriteArtist());
-        user.setTheme(request.getTheme());
-        user.setPhoneNumber(request.getPhoneNumber());
+        if (request.getFirstName() != null) user.setFirstName(request.getFirstName());
+        if (request.getLastName() != null) user.setLastName(request.getLastName());
+        if (request.getUsername() != null) user.setUsername(request.getUsername());
+        if (request.getBio() != null) user.setBio(request.getBio());
+        if (request.getCountry() != null) user.setCountry(request.getCountry());
+        if (request.getTimezone() != null) user.setTimezone(request.getTimezone());
+        if (request.getLanguage() != null) user.setLanguage(request.getLanguage());
+        if (request.getFavoriteGenre() != null) user.setFavoriteGenre(request.getFavoriteGenre());
+        if (request.getFavoriteArtist() != null) user.setFavoriteArtist(request.getFavoriteArtist());
+        if (request.getTheme() != null) user.setTheme(request.getTheme());
+        if (request.getPhoneNumber() != null) user.setPhoneNumber(request.getPhoneNumber());
 
         user = userRepository.save(user);
 

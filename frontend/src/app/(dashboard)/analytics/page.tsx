@@ -68,21 +68,25 @@ export default function AnalyticsPage() {
             title="Total Albums" 
             value={analytics.totalAlbums} 
             icon={<Library className="w-6 h-6" />} 
+            tooltip="Total number of albums saved in your library."
           />
           <StatCard 
             title="Total Artists" 
             value={analytics.totalUniqueArtists} 
             icon={<Music className="w-6 h-6" />} 
+            tooltip="Number of unique artists across your entire collection."
           />
           <StatCard 
             title="Genres" 
             value={analytics.totalGenres} 
             icon={<BarChart className="w-6 h-6" />} 
+            tooltip="Total variety of genres represented in your albums."
           />
           <StatCard 
             title="Avg. Rating" 
             value={analytics.averagePersonalRating ? analytics.averagePersonalRating.toFixed(1) : "N/A"} 
             icon={<Star className="w-6 h-6" />} 
+            tooltip="Average rating you have given to albums in your collection (out of 5)."
           />
         </div>
 

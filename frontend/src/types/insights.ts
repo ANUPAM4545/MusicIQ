@@ -19,6 +19,11 @@ export interface CollectionHealthDto {
   score: number;
   title: string;
   description: string;
+  ratedAlbumsScore: number;
+  metadataCompletenessScore: number;
+  genreDiversityScore: number;
+  artistDiversityScore: number;
+  collectionActivityScore: number;
 }
 
 export interface AiInsightsResponse {

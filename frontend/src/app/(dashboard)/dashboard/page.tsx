@@ -60,16 +60,36 @@ export default function DashboardPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link href="/analytics">
-            <StatCard title="Total Albums" value={analyticsData?.totalAlbums ?? 0} icon={<Disc3 />} />
+            <StatCard 
+              title="Total Albums" 
+              value={analyticsData?.totalAlbums ?? 0} 
+              icon={<Disc3 />} 
+              tooltip="Total number of albums saved in your library."
+            />
           </Link>
           <Link href="/analytics">
-            <StatCard title="Total Artists" value={analyticsData?.totalUniqueArtists ?? 0} icon={<Users />} />
+            <StatCard 
+              title="Total Artists" 
+              value={analyticsData?.totalUniqueArtists ?? 0} 
+              icon={<Users />} 
+              tooltip="Number of unique artists across your entire collection."
+            />
           </Link>
           <Link href="/analytics">
-            <StatCard title="Genres" value={analyticsData?.totalGenres ?? 0} icon={<LayoutList />} />
+            <StatCard 
+              title="Genres" 
+              value={analyticsData?.totalGenres ?? 0} 
+              icon={<LayoutList />} 
+              tooltip="Total variety of genres represented in your albums."
+            />
           </Link>
           <Link href="/analytics">
-            <StatCard title="Avg Rating" value={analyticsData?.averagePersonalRating?.toFixed(1) ?? '0.0'} icon={<Star />} />
+            <StatCard 
+              title="Avg Rating" 
+              value={analyticsData?.averagePersonalRating?.toFixed(1) ?? '0.0'} 
+              icon={<Star />} 
+              tooltip="Average rating you have given to albums in your collection (out of 5)."
+            />
           </Link>
         </div>
       )}

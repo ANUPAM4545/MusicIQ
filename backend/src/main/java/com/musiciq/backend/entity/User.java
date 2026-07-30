@@ -44,6 +44,39 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Role role;
 
+    @Column
+    private String username;
+
+    @Column
+    private String bio;
+
+    @Column
+    private String avatarUrl;
+
+    @Column
+    private String country;
+
+    @Column
+    private String timezone;
+
+    @Column
+    private String language;
+
+    @Column
+    private String favoriteGenre;
+
+    @Column
+    private String favoriteArtist;
+
+    @Column
+    private String theme;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
+    private LocalDateTime lastLogin;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;

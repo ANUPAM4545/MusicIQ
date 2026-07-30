@@ -1,6 +1,5 @@
 package com.musiciq.backend.service;
 
-import com.musiciq.backend.dto.auth.AuthRequest;
 import com.musiciq.backend.dto.auth.AuthResponse;
 import com.musiciq.backend.dto.auth.LoginRequest;
 import com.musiciq.backend.dto.auth.RegisterRequest;
@@ -41,6 +40,7 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
 
+        user.setLastLogin(java.time.LocalDateTime.now());
         user = userRepository.save(user);
 
         String jwtToken = jwtService.generateToken(user);
@@ -51,7 +51,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public AuthResponse login(LoginRequest request) {
         String email = request.getEmail().toLowerCase();
         
@@ -64,6 +64,9 @@ public class AuthenticationService {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(); // Authentication would have failed if not found
+        
+        user.setLastLogin(java.time.LocalDateTime.now());
+        user = userRepository.save(user);
 
         String jwtToken = jwtService.generateToken(user);
 

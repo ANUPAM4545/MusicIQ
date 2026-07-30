@@ -17,6 +17,7 @@ import java.util.UUID;
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, UUID> {
     List<Album> findByUser_Id(UUID userId);
+    List<Album> findByUser_IdOrderByCreatedAtDesc(UUID userId);
     Optional<Album> findByIdAndUser_Id(UUID id, UUID userId);
     boolean existsByItunesIdAndUser_Id(String itunesId, UUID userId);
 

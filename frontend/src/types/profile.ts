@@ -31,21 +31,12 @@ export interface ProfileUpdateRequest {
   phoneNumber?: string;
 }
 
-export interface CollectionHealth {
-  score: number;
-  ratedAlbumsScore: number;
-  metadataCompletenessScore: number;
-  genreDiversityScore: number;
-  artistDiversityScore: number;
-  collectionActivityScore: number;
-}
-
 export interface ProfileStats {
   albumsSaved: number;
   artistsCount: number;
   genresCount: number;
   averageRating: number;
-  collectionHealth: CollectionHealth;
+  collectionHealth: number;
   diversityScore: number;
   aiInsightCount: number;
 }

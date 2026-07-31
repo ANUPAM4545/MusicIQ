@@ -8,10 +8,15 @@ interface AccountStatsProps {
 }
 
 export function AccountStats({ stats }: AccountStatsProps) {
+  const safePercentage = (val: any) => {
+    if (val === undefined || val === null || isNaN(Number(val)) || !isFinite(Number(val))) return 0;
+    return Math.round(Math.max(0, Math.min(100, Number(val))));
+  };
+
   const statCards = [
     {
       title: "Albums Saved",
-      value: stats.albumsSaved,
+      value: stats.albumsSaved || 0,
       icon: Disc,
       color: "text-blue-500",
       bg: "bg-blue-100",
@@ -19,7 +24,7 @@ export function AccountStats({ stats }: AccountStatsProps) {
     },
     {
       title: "Artists",
-      value: stats.artistsCount,
+      value: stats.artistsCount || 0,
       icon: Mic2,
       color: "text-purple-500",
       bg: "bg-purple-100",
@@ -27,7 +32,7 @@ export function AccountStats({ stats }: AccountStatsProps) {
     },
     {
       title: "Genres",
-      value: stats.genresCount,
+      value: stats.genresCount || 0,
       icon: Music,
       color: "text-pink-500",
       bg: "bg-pink-100",
@@ -43,7 +48,7 @@ export function AccountStats({ stats }: AccountStatsProps) {
     },
     {
       title: "Collection Health",
-      value: `${stats.collectionHealth.score}%`,
+      value: `${safePercentage(stats.collectionHealth)}%`,
       icon: Activity,
       color: "text-green-500",
       bg: "bg-green-100",
@@ -51,7 +56,7 @@ export function AccountStats({ stats }: AccountStatsProps) {
     },
     {
       title: "Diversity Score",
-      value: `${stats.diversityScore}%`,
+      value: `${safePercentage(stats.diversityScore)}%`,
       icon: BarChart2,
       color: "text-indigo-500",
       bg: "bg-indigo-100",

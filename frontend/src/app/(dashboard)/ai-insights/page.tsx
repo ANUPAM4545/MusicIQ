@@ -51,7 +51,7 @@ export default function AiInsightsPage() {
   const { insights, revisitSuggestions, collectionHealth } = response;
   
   // Group insights by category
-  const summaryInsight = insights.find(i => i.category === 'SUMMARY');
+  const summaryInsights = insights.filter(i => i.category === 'SUMMARY');
   const diversityInsights = insights.filter(i => i.category === 'DIVERSITY');
   const behaviourInsights = insights.filter(i => i.category === 'BEHAVIOUR');
   const trendInsights = insights.filter(i => i.category === 'TREND');
@@ -64,13 +64,24 @@ export default function AiInsightsPage() {
       />
 
       {/* Top Level Summary & Health */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {summaryInsight && (
-          <InsightSummaryCard insight={summaryInsight} isSummary={true} />
-        )}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        {/* Left column: Collection Health Card (1 column on desktop) */}
         {collectionHealth && (
-          <CollectionHealthCard health={collectionHealth} />
+          <div className="lg:col-span-1">
+            <CollectionHealthCard health={collectionHealth} />
+          </div>
         )}
+
+        {/* Right column: Summary Insights (2 columns on desktop) */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${collectionHealth ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+          {summaryInsights.map((insight, index) => (
+            <InsightSummaryCard 
+              key={`sum-${index}`} 
+              insight={insight} 
+              isSummary={index === 0 && summaryInsights.length % 2 !== 0} 
+            />
+          ))}
+        </div>
       </div>
 
       {/* Diversity & Discovery */}

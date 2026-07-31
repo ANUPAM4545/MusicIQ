@@ -8,7 +8,7 @@ interface AccountStatsProps {
 }
 
 export function AccountStats({ stats }: AccountStatsProps) {
-  const safePercentage = (val: any) => {
+  const safePercentage = (val: number | undefined | null) => {
     if (val === undefined || val === null || isNaN(Number(val)) || !isFinite(Number(val))) return 0;
     return Math.round(Math.max(0, Math.min(100, Number(val))));
   };

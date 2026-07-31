@@ -1,5 +1,5 @@
 import { UserProfile } from "@/types/profile";
-import { User, Calendar, MapPin, Globe } from "lucide-react";
+import { Calendar, MapPin, Globe } from "lucide-react";
 import { formatDateSafe } from "@/lib/utils";
 import { UserAvatar } from "@/components/ui/user-avatar";
 

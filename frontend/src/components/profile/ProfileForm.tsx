@@ -145,12 +145,12 @@ export function ProfileForm({ profile }: ProfileFormProps) {
                   </FormItem>
                 )}
               />
-              <FormItem>
-                <FormLabel>Email (Read Only)</FormLabel>
-                <FormControl>
-                  <Input value={profile.email} disabled />
-                </FormControl>
-              </FormItem>
+              <div className="space-y-2">
+                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-300">
+                  Email (Read Only)
+                </label>
+                <Input value={profile.email} disabled className="bg-muted cursor-not-allowed" />
+              </div>
             </div>
 
             <FormField

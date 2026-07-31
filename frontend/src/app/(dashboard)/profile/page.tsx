@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { 
   useProfile, 
   useProfileStats, 
@@ -19,6 +20,8 @@ import { ErrorState } from "@/components/ui/ErrorState";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ProfilePage() {
+  const [activeTab, setActiveTab] = useState("overview");
+
   const { data: profile, isLoading: isProfileLoading, error: profileError } = useProfile();
   const { data: stats, isLoading: isStatsLoading } = useProfileStats();
   const { data: personality, isLoading: isPersonalityLoading } = useListeningPersonality();
@@ -52,7 +55,7 @@ export default function ProfilePage() {
       
       {stats && <AccountStats stats={stats} />}
 
-      <Tabs defaultValue="overview" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="activity">Activity</TabsTrigger>

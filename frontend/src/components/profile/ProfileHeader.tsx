@@ -1,6 +1,6 @@
 import { UserProfile } from "@/types/profile";
 import { User, Calendar, MapPin, Globe } from "lucide-react";
-import { format } from "date-fns";
+import { formatDateSafe } from "@/lib/utils";
 import { UserAvatar } from "@/components/ui/user-avatar";
 
 interface ProfileHeaderProps {
@@ -49,7 +49,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
               )}
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />
-                <span>Member since {format(new Date(profile.createdAt), "MMMM yyyy")}</span>
+                <span>Member since {formatDateSafe(profile.createdAt, "MMMM yyyy")}</span>
               </div>
             </div>
           </div>

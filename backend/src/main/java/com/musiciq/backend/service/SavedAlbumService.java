@@ -26,6 +26,7 @@ public class SavedAlbumService {
     private final AlbumRepository albumRepository;
     private final UserRepository userRepository;
     private final AlbumMapper albumMapper;
+    private final ProfileService profileService;
 
     @Transactional
     public SavedAlbumResponse saveAlbum(String userEmail, AlbumCreateRequest request) {
@@ -43,6 +44,8 @@ public class SavedAlbumService {
 
         Album savedAlbum = albumRepository.save(album);
         log.info("User {} saved album {} to library", user.getId(), savedAlbum.getId());
+
+        profileService.logActivity(user, "Album Added", "Added '" + savedAlbum.getTitle() + "' by " + savedAlbum.getArtist() + " to library");
 
         return albumMapper.toSavedAlbumResponse(savedAlbum);
     }
@@ -68,6 +71,11 @@ public class SavedAlbumService {
         Album updatedAlbum = albumRepository.save(album);
         
         log.info("User {} updated album {}", album.getUser().getId(), album.getId());
+        if (request.getPersonalRating() != null) {
+            profileService.logActivity(album.getUser(), "Rating Updated", "Rated '" + updatedAlbum.getTitle() + "' " + request.getPersonalRating() + "/10");
+        } else {
+            profileService.logActivity(album.getUser(), "Album Updated", "Updated details for '" + updatedAlbum.getTitle() + "'");
+        }
         return albumMapper.toSavedAlbumResponse(updatedAlbum);
     }
 

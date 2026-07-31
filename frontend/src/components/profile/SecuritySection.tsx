@@ -1,7 +1,7 @@
 "use client";
 
 import { UserProfile } from "@/types/profile";
-import { format } from "date-fns";
+import { formatDateSafe } from "@/lib/utils";
 import { Shield, Key, Mail, Clock, LogOut, Trash2 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -39,7 +39,7 @@ export function SecuritySection({ profile }: SecuritySectionProps) {
             <div>
               <p className="text-sm font-medium text-gray-900">Account Created</p>
               <p className="text-sm text-gray-500">
-                {format(new Date(profile.createdAt), "MMM d, yyyy")}
+                {formatDateSafe(profile.createdAt, "MMM d, yyyy")}
               </p>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function SecuritySection({ profile }: SecuritySectionProps) {
             <div>
               <h4 className="text-sm font-medium text-gray-900">Current Session</h4>
               <p className="text-sm text-gray-500">
-                Active since {profile.lastLogin ? format(new Date(profile.lastLogin), "MMM d, yyyy h:mm a") : 'Login'}
+                Active since {formatDateSafe(profile.lastLogin, "MMM d, yyyy h:mm a", "Login")}
               </p>
             </div>
             <Button variant="outline" size="sm" onClick={handleLogout} className="text-gray-700">

@@ -1,5 +1,5 @@
 import { ActivityLog } from "@/types/profile";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceSafe } from "@/lib/utils";
 import { Circle, User, Disc, Star, Edit3 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 
@@ -41,7 +41,7 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{activity.description}</p>
                   </div>
                   <time className="text-xs text-gray-400 shrink-0 mt-0.5">
-                    {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+                    {formatDistanceSafe(activity.timestamp)}
                   </time>
                 </div>
               </div>
